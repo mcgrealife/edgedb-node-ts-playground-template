@@ -9,7 +9,7 @@
     "migrate": "edgedb migration create && edgedb migration apply && npm run generate",
     "generate": "npx @edgedb/generate edgeql-js && npx @edgedb/generate interfaces && npx @edgedb/generate queries --file",
     "reminder": "echo 'reminder to npm run migrate if you changed your schema'",
-    "ui": "edgedb ui"
+    "ui": "edgedb ui --print-url"
   },
   "dependencies": {
     "edgedb": "^1.0.2",
