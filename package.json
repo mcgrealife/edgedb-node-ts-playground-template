@@ -3,8 +3,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "build": "tsc",
-    "start": "nodemon --exec ts-node src/index.ts",
+    "migrate": "edgedb migration create && edgedb migration apply && npm run generate",
     "generate": "npx @edgedb/generate edgeql-js && npx @edgedb/generate interfaces && npx @edgedb/generate queries --file"
   },
   "dependencies": {

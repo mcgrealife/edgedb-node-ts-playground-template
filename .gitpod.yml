@@ -9,6 +9,12 @@ tasks:
     command: npm run start
   - name: install-edgedb-cli
     command: curl --proto '=https' --tlsv1.2 -sSf https://sh.edgedb.com | sh -s -- -y -v ; edgedb project init --non-interactive
+  - name: move example schema file from root into db/schema, overwriting blank schema file created by edgedb project init
+    command: mv default.esdl /dbschema
+  - name: move example schema file from root into db/schema, overwriting blank schema file created by edgedb project init
+    command: mv default.esdl /dbschema
+  - name: run edgedb migrations and generators on the overwritten example schema file
+    command: npm run migrate
 # vscode:
 #   extensions:
 #     - https://github.com/edgedb/edgedb-editor-plugin/issues/22 (schema syntax highlighting unavailable until VScode extension published to OpenVSX)
