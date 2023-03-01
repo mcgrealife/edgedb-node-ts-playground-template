@@ -3,11 +3,13 @@
   "version": "0.0.0",
   "scripts": {
     "build": "tsc",
-    "start": "nodemon --exec ts-node src/index.ts"
+    "start": "nodemon --exec ts-node src/index.ts",
+    "generate": "npx @edgedb/generate edgeql-js && npx @edgedb/generate interfaces && npx @edgedb/generate queries --file"
   },
   "dependencies": {
     "nodemon": "^2.0.12",
-    "typescript": "^4.9.5"
+    "typescript": "^4.9.5",
+    "edgedb": "^1.0.2"
   },
   "devDependencies": {
     "@types/node": "^18.14.2",
