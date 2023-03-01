@@ -5,18 +5,16 @@
 # Learn more from ready-to-use templates: https://www.gitpod.io/docs/introduction/getting-started/quickstart
 
 tasks:
-  - init: npm install
-    command: npm run start
-  - name: install-edgedb-cli
-    command: curl --proto '=https' --tlsv1.2 -sSf https://sh.edgedb.com | sh -s -- -y -v ; edgedb project init --non-interactive
-#   - name: move example schema file from root into dbschema, overwriting blank schema file created by edgedb project init
-#     command: mv default.esdl dbschema
-#   - name: run edgedb migrations and generators on the overwritten example schema file
-#     command: edgedb migration create --non-interactive && edgedb migration apply --non-interactive && npm run generate
-#   - name: open useful files and terminal
-#     command: gp open dbschema/default.esdl && gp open src/index.ts
-  - name: instructions
-    command: echo 'modify the schema in default.esdl, save, npm run migrate; then update the query builder in src/index.ts; npm run start to execute the query!  '
+  - name: install npm packages, install-edgedb-cli, initialize project, overwrite example schema, run migrations, open files
+    init: |
+      npm install
+      curl --proto '=https' --tlsv1.2 -sSf https://sh.edgedb.com | sh -s -- -y -v
+      edgedb project init --non-interactive
+      mv default.esdl dbschema
+      edgedb migration create --non-interactive && edgedb migration apply --non-interactive && npm run generate
+      gp open dbschema/default.esdl
+      gp open src/index.ts
+      echo 'modify the schema in default.esdl, save, npm run migrate; then update the query builder in src/index.ts; npm run start to execute the query!  '
 # vscode:
 #   extensions:
 #     - https://github.com/edgedb/edgedb-editor-plugin/issues/22 (schema syntax highlighting unavailable until VScode extension published to OpenVSX)
