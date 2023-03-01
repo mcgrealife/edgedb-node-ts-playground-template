@@ -1,6 +1,7 @@
 {
   "name": "node-starter",
   "version": "0.0.0",
+  "type": "module",
   "scripts": {
     "build": "tsc",
     "start": "nodemon --exec ts-node src/index.ts",
