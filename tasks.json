@@ -1,0 +1,28 @@
+{
+  // These tasks will run in order when initializing your CodeSandbox project.
+  "setupTasks": [
+    {
+      "name": "Installing Dependencies",
+      "command": "yarn install"
+    },
+    {
+      "name": "Install Edgedb CLI",
+      // "command": "curl --proto '=https' --tlsv1.2 -sSf https://sh.edgedb.com | sh -s -- -y -v "
+      "command": "curl --proto '=https' --tlsv1.2 -sSf https://sh.edgedb.com | sh -s -- -y -v ; pwd; source '/project/home/pitcher-host/.config/edgedb/env' ; source '/project/home/mcgrealife/.config/edgedb/env'"
+      // "command": "curl --proto '=https' --tlsv1.2 -sSf https://sh.edgedb.com | sh -s -- -y -v ; pwd; source '/project/home/pitcher-host/.config/edgedb/env' ; source '/project/home/mcgrealife/.config/edgedb/env' ; source '/project/codesandbox-template-vite-react/.config/edgedb/env' ;  ; edgedb project init --non-interactive"
+    },
+    {
+      "name": "Install Edgedb CLI",
+      "command": "edgedb -v"
+      // "command": "curl --proto '=https' --tlsv1.2 -sSf https://sh.edgedb.com | sh -s -- -y -v ; pwd; source '/project/home/pitcher-host/.config/edgedb/env' ; source '/project/home/mcgrealife/.config/edgedb/env' ; source '/project/codesandbox-template-vite-react/.config/edgedb/env' ;  ; edgedb project init --non-interactive"
+    }
+  ],
+  // These tasks can be run from CodeSandbox. Running one will open a log in the app.
+  "tasks": {
+    "yarn dev": {
+      "name": "yarn dev",
+      "command": "yarn dev",
+      "runAtStart": true
+    }
+  }
+}
