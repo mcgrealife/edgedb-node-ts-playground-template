@@ -3,17 +3,22 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "build": "tsc",
+    "tsnode": "echo 'this is an optional alternate way to run typescript files directly. Alternatively, npm run start.' && npm run reminder && ts-node --esm src/index.ts",
+    "start": "npm run reminder && npm run build && node dist/src",
     "migrate": "edgedb migration create && edgedb migration apply && npm run generate",
-    "generate": "npx @edgedb/generate edgeql-js && npx @edgedb/generate interfaces && npx @edgedb/generate queries --file"
+    "generate": "npx @edgedb/generate edgeql-js && npx @edgedb/generate interfaces && npx @edgedb/generate queries --file",
+    "reminder": "echo 'reminder to npm run migrate if you changed your schema'",
+    "ui": "edgedb ui"
   },
   "dependencies": {
     "edgedb": "^1.0.2",
-    "nodemon": "^2.0.12",
     "typescript": "^4.9.5"
   },
   "devDependencies": {
     "@edgedb/generate": "^0.0.8",
     "@types/node": "^18.14.2",
+    "nodemon": "^2.0.20",
     "ts-node": "^10.9.1"
   }
 }

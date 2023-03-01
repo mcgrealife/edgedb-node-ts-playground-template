@@ -1,3 +1,5 @@
+// To run this query, in the vscode browser terminal, input `npm run start`
+
 import { createClient } from 'edgedb'
 import e from '../dbschema/edgeql-js/index.mjs'
 
