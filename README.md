@@ -1,3 +1,7 @@
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/mcgrealife/edgdedb-node-ts-playground-template)
+
+
+
 # node-ts_nodemon_tsc
 
 - installed `tsc`, `nodemon`, and `ts-node` manually
