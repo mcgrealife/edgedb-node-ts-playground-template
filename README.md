@@ -7,6 +7,6 @@
   - `src/index.ts`: *the query builder*
 - Read the comments in each file
 
-> Recommend dragging the second tab into a separate editor pane
 
+#### Side-by-side editor panes recommended
 ![recommend-dragging-side-by-side-editor-pane](https://user-images.githubusercontent.com/11381911/222273526-c1230d51-c6d8-422d-9bf5-5a878b38a025.gif)
