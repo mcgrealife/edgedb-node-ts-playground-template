@@ -1,4 +1,5 @@
-// To run this query, in the vscode browser terminal, input `npm run start`
+// To execute this edgedb query, `npm run start`
+// For 'e' to access your latest schema, `npm run migrate`
 
 import { createClient } from 'edgedb'
 import e from '../dbschema/edgeql-js/index.mjs'
