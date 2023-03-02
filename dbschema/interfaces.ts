@@ -51,21 +51,30 @@ export namespace cfg {
   }
   export interface Trust extends AuthMethod {}
 }
-export interface Color extends std.$Object {
-  "code"?: string | null;
+export interface A extends std.$Object {
+  "b": B[];
+}
+export interface B extends std.$Object {
   "name"?: string | null;
+}
+export interface Color extends std.$Object {
+  "name": string;
+  "code": string;
+  "createdAt": Date;
 }
 export interface Product extends std.$Object {
   "barcode"?: string | null;
-  "code"?: string | null;
   "familyCode"?: string | null;
+  "sellingUnitComment"?: string | null;
   "name"?: string | null;
+  "code"?: string | null;
   "color"?: Color | null;
   "size"?: Size | null;
 }
 export interface Size extends std.$Object {
-  "code"?: string | null;
-  "name"?: string | null;
+  "code": string;
+  "createdAt": Date;
+  "name": string;
 }
 export namespace schema {
   export type AccessKind = "Select" | "UpdateRead" | "UpdateWrite" | "Delete" | "Insert";
@@ -278,6 +287,8 @@ export interface types {
     "Trust": cfg.Trust;
   };
   "default": {
+    "A": A;
+    "B": B;
     "Color": Color;
     "Product": Product;
     "Size": Size;

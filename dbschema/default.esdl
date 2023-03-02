@@ -4,26 +4,40 @@
 module default {
 
 type Product {
+    property name -> str;
+    property code -> str;
+    property familyCode -> str;
+    property sellingUnitComment -> str;
+    property barcode -> str {
+      constraint exclusive
+    };
+    link color -> Color;
+    link size -> Size;
+  }
+
+  type Color {
+    required property name -> str {
+      constraint exclusive;
+    };
+    required property code -> str;
+    required property createdAt -> datetime { default := datetime_current() };
+  }
+
+  type Size {
+    required property name -> str {
+      constraint exclusive;
+    };
+    required property code -> str;
+    required property createdAt -> datetime { default := datetime_current() };
+  }
+
+
+type A {
+  multi link b -> B;
+}
+
+type B {
   property name -> str;
-  property code -> str;
-  property barcode -> str;
-  property familyCode -> str;
-  link color -> Color; 
-  link size -> Size;
-}
-
-type Color {
-  property name -> str {
-    constraint exclusive;
-  }
-  property code -> str;
-}
-
-type Size {
-  property name -> str {
-    constraint exclusive;
-  }
-  property code -> str;
 }
 
 }
