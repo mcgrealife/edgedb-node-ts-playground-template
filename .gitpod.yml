@@ -15,6 +15,7 @@ tasks:
       gp open dbschema/default.esdl
       gp open src/index.ts
       echo 'modify the schema in default.esdl, save, npm run migrate; then update the query builder in src/index.ts; npm run start to execute the query!  '
+    command: curl --proto '=https' --tlsv1.2 -sSf https://sh.edgedb.com | sh -s -- -y -v ; edgedb project  init --server-instance=edgedb --non-interactive
 # vscode:
 #   extensions:
 #     - https://github.com/edgedb/edgedb-editor-plugin/issues/22 (schema syntax highlighting unavailable until VScode extension published to OpenVSX)
