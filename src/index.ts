@@ -63,6 +63,22 @@ const products = await e
         'else',
         e.cast(e.int32, null)
       ),
+      // can it be simplified, without all the casting?
+      computed6: e.op(
+        product.token_amount,
+        'if',
+        e.op(product.show_token_amount, '=', true),
+        'else',
+        e.cast(e.int32, null)
+      ),
+      // even simpler?
+      computed7: e.op(
+        product.token_amount,
+        'if',
+        product.show_token_amount,
+        'else',
+        e.cast(e.int32, null)
+      ),
 
       // show_token_amount: true,
       // show_token_amount: true,
