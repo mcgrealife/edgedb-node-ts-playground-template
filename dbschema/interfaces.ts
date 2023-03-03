@@ -54,7 +54,7 @@ export namespace cfg {
 export interface Product extends std.$Object {
   "show_token_amount": boolean;
   "token_amount": number;
-  "schema_computed_token": number;
+  "schema_computed_token"?: number | null;
 }
 export namespace schema {
   export type AccessKind = "Select" | "UpdateRead" | "UpdateWrite" | "Delete" | "Insert";

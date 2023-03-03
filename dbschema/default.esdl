@@ -6,7 +6,7 @@ module default {
 type Product {
   required property show_token_amount -> bool;
   required property token_amount -> int32;
-  property schema_computed_token := .token_amount if .show_token_amount = true else {}
+  property schema_computed_token := .token_amount if .show_token_amount = true else <int32>{}
 }
 
 }

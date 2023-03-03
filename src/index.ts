@@ -27,7 +27,7 @@ const products = await e
     // )
     return {
       // id: true,
-      // schema_computed_token: true,
+      schema_computed_token: true,
       // computed: true ? e.cast(e.str, null) : e.cast(e.str, 'test'),
       //computed: e.cast(e.bool, product.show_token_amount),
 
