@@ -6,10 +6,22 @@ import e from '../dbschema/edgeql-js/index.mjs'
 
 const client = createClient()
 
-const query = e.insert(e.Example, {
-  name: 'test name',
-})
+const data = {
+  // name: 'Jack',
+  human: true,
+}
 
-const result = await query.run(client)
+const query = e.params({ name: e.optional(e.str), human: e.bool }, (params) =>
+  e.select(
+    e.insert(e.Example, {
+      name: params.name,
+      human: params.human,
+    }),
+    (example) => e.Example['*']
+    // (example) => example['*'] // does not work
+  )
+)
+
+const result = await query.run(client, data)
 
 console.log('edgeql query result:', result)

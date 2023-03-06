@@ -5,6 +5,7 @@ module default {
 
   type Example {
     property name -> str;
+    property human -> bool;
   }
 
 }
