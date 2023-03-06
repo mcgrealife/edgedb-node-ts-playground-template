@@ -6,10 +6,34 @@ import e from '../dbschema/edgeql-js/index.mjs'
 
 const client = createClient()
 
-const query = e.insert(e.Example, {
-  name: 'test name',
-})
+const data = [
+  {
+    name: 'string',
+  },
+  {
+    name: ['array', 'of', 'strings'],
+  },
+  {
+    // empty, name key does not exist
+  },
+]
+// NOTE: I cannot find a way to type a union param. But it does work when params is types as e.json, and then checked on insertion instead
 
-const result = await query.run(client)
+// This works! for checking if it's an array or not
+const query = e.params({ items: e.json }, (params) =>
+  e.for(e.json_array_unpack(params.items), (item) =>
+    e.insert(e.Example, {
+      name: e.op(
+        'true',
+        'if',
+        e.op(e.json_typeof(item.name), '=', 'array'),
+        'else',
+        'false'
+      ),
+    })
+  )
+)
+
+const result = await query.run(client, { items: data })
 
 console.log('edgeql query result:', result)
