@@ -14,6 +14,7 @@ tasks:
     init: |
       edgedb project init --non-interactive
       mv default.esdl dbschema
+    command:
       edgedb migration create --non-interactive && edgedb migration apply && npm run generate
       gp open dbschema/default.esdl
       gp open src/index.ts
