@@ -1,6 +1,7 @@
 # https://www.gitpod.io/docs/introduction/learn-gitpod/gitpod-yaml
 
-image: .gitpod.Dockerfile
+image:
+    file: .gitpod.Dockerfile
 
 tasks:
 # Test install CLI via dockerfile to persist between workspace restarts
