@@ -6,8 +6,9 @@
 tasks:
 # Test install CLI via dockerfile to persist between workspace restarts
   - name: install packages, overwrite example schema, run migrations, open files
-    before: gp open installing.md
+    before: echo 'before'
     init: |
+      gp open installing.md
       yarn
       curl --proto '=https' --tlsv1.2 -sSf https://sh.edgedb.com | sh -s -- -y -v
       edgedb project init --non-interactive
@@ -15,6 +16,7 @@ tasks:
       edgedb migration create --non-interactive && edgedb migration apply && yarn generate
     command: |
       curl --proto '=https' --tlsv1.2 -sSf https://sh.edgedb.com | sh -s -- -y -v ; edgedb project  init --server-instance=edgedb --non-interactive
+      echo 'opening welcome'
       gp open welcome.md
 vscode:
   extensions:
