@@ -16,7 +16,8 @@ tasks:
       gp open welcome.md
   - name: reinstall CLI on restart; reinitialize project with link flag
     command: curl --proto '=https' --tlsv1.2 -sSf https://sh.edgedb.com | sh -s -- -y -v ; edgedb project  init --server-instance=edgedb --non-interactive
-# vscode:
-#   extensions:
+vscode:
+  extensions:
+    - matt-rudge.auto-open-preview-panel
 #     - https://github.com/edgedb/edgedb-editor-plugin/issues/22 (schema syntax highlighting unavailable until VScode extension published to OpenVSX)
 
