@@ -12,11 +12,10 @@ tasks:
       curl --proto '=https' --tlsv1.2 -sSf https://sh.edgedb.com | sh -s -- -y -v
       edgedb project init --non-interactive
       mv default.esdl dbschema
-    command: |
       edgedb migration create --non-interactive && edgedb migration apply && yarn generate
+    command: |
+      curl --proto '=https' --tlsv1.2 -sSf https://sh.edgedb.com | sh -s -- -y -v ; edgedb project  init --server-instance=edgedb --non-interactive
       gp open welcome.md
-  - name: reinstall CLI on restart; reinitialize project with link flag
-    command: curl --proto '=https' --tlsv1.2 -sSf https://sh.edgedb.com | sh -s -- -y -v ; edgedb project  init --server-instance=edgedb --non-interactive
 vscode:
   extensions:
     - matt-rudge.auto-open-preview-panel
