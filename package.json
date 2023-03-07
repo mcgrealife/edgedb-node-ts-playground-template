@@ -6,7 +6,7 @@
     "build": "tsc",
     "start": "yarn build && node dist/src",
     "migrate": "edgedb migration create && edgedb migration apply && yarn generate",
-    "generate": "yarn @edgedb/generate edgeql-js && yarn @edgedb/generate interfaces && yarn @edgedb/generate queries --file",
+    "generate": "npx @edgedb/generate edgeql-js && npx @edgedb/generate interfaces && npx @edgedb/generate queries --file",
     "ui": "edgedb ui --print-url"
   },
   "dependencies": {
