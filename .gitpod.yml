@@ -15,7 +15,7 @@ tasks:
       mv default.esdl dbschema
       edgedb migration create --non-interactive && edgedb migration apply && yarn generate
     command: |
-      test -e /home/gitpod/.local/bin && echo 'hello' || curl --proto '=https' --tlsv1.2 -sSf https://sh.edgedb.com | sh -s -- -y -v ; edgedb project init --server-instance=edgedb --non-interactive
+      if test -e /home/gitpod/.local/bin/edgedb; then echo 'EdgeDB CLI installed successfully'; else curl --proto '=https' --tlsv1.2 -sSf https://sh.edgedb.com | sh -s -- -y -v && edgedb project init --server-instance=edgedb --non-interactive; fi
       echo 'opening welcome'
       gp open welcome.md
 vscode:
