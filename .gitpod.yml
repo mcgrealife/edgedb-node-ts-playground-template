@@ -16,8 +16,7 @@ tasks:
       mv default.esdl dbschema
     command: |
       edgedb migration create --non-interactive && edgedb migration apply && npm run generate
-      gp open dbschema/default.esdl
-      gp open src/index.ts
+      gp open welcome.md
   # - name: reinstall CLI on restart; reinitialize project with link flag
   #   command: curl --proto '=https' --tlsv1.2 -sSf https://sh.edgedb.com | sh -s -- -y -v ; edgedb project  init --server-instance=edgedb --non-interactive
 # vscode:
