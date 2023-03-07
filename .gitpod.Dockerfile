@@ -5,12 +5,7 @@ RUN sudo curl --proto '=https' --tlsv1.2 -sSf https://sh.edgedb.com | sh -s -- -
 # switch to user gitpod
 USER gitpod 
 
-# NOTE: this installs in `/home/gitpod` but the workspace terminal is in /workspace/edgedb-node-ts-playground-template. Testing some ls and 
-RUN ls
-RUN cd ~
-RUN pwd
-RUN ls
-# end test
-
-# else consider using `--project-dir=project-dir` flag
-RUN edgedb project  init --server-instance=edgedb --non-interactive
+# NOTE: this installs in `/home/gitpod` but the workspace terminal is in /workspace/edgedb-node-ts-playground-template. 
+# note: the workspace name might change if users for repo
+# test `--project-dir=project-dir` flag ; test restarting workspace
+RUN edgedb project  init --server-instance=edgedb --non-interactive --project-dir=/workspace/edgedb-node-ts-playground-template
