@@ -6,6 +6,6 @@
 
 
 # commands
-- `npm run migrate` - creates and applies migrations
-- `npm run start` - transpiles ts to js, outputs to 'dist/src/'
-- `npm run ui` - returns edgedb ui link in terminal
+- `yarn migrate` - creates and applies migrations
+- `yarn start` - transpiles ts to js, outputs to 'dist/src/'
+- `yarn ui` - returns edgedb ui link in terminal
