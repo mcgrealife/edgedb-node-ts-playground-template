@@ -6,6 +6,7 @@
 tasks:
 # Test install CLI via dockerfile to persist between workspace restarts
   - name: install packages, overwrite example schema, run migrations, open files
+    before: echo 'before'
     init: |
       yarn
       curl --proto '=https' --tlsv1.2 -sSf https://sh.edgedb.com | sh -s -- -y -v ; edgedb project  init --server-instance=edgedb --non-interactive
