@@ -2,16 +2,16 @@
 
 tasks:
 # read "caveats". installs to /home/gitpod/.local/bin which is outside the /workspace/ and thus lost between workspace builds. recommend using before task or custom docker. trying before first.
-  - name: install npm packages, install-edgedb-cli, initialize project, overwrite example schema, run migrations, open files
+  - name: install packages, install-edgedb-cli, initialize project, overwrite example schema, run migrations, open files
     before: |
-      npm install
+      yarn
       curl --proto '=https' --tlsv1.2 -sSf https://sh.edgedb.com | sh -s -- -y -v
       edgedb project  init --server-instance=edgedb --non-interactive
     init: |
       edgedb project init --non-interactive
       mv default.esdl dbschema
     command: |
-      edgedb migration create --non-interactive && edgedb migration apply && npm run generate
+      edgedb migration create --non-interactive && edgedb migration apply && yarn generate
       gp open welcome.md
   # - name: reinstall CLI on restart; reinitialize project with link flag
   #   command: curl --proto '=https' --tlsv1.2 -sSf https://sh.edgedb.com | sh -s -- -y -v ; edgedb project  init --server-instance=edgedb --non-interactive
