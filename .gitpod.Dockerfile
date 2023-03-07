@@ -4,6 +4,6 @@ RUN sudo curl --proto '=https' --tlsv1.2 -sSf https://sh.edgedb.com | sh -s -- -
           
 RUN pwd
 # Apply user-specific settings using `USER gitpod` or by cd to `/home/gitpod`
-USER gitpod pwd
-
-USER gitpod edgedb project  init --server-instance=edgedb --non-interactive
+USER gitpod 
+RUN pwd
+RUN gitpod edgedb project  init --server-instance=edgedb --non-interactive
