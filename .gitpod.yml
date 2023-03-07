@@ -18,7 +18,6 @@ tasks:
       edgedb migration create --non-interactive && edgedb migration apply && npm run generate
       gp open dbschema/default.esdl
       gp open src/index.ts
-      echo 'modify the schema in default.esdl, save, npm run migrate; then update the query builder in src/index.ts; npm run start to execute the query!  '
   # - name: reinstall CLI on restart; reinitialize project with link flag
   #   command: curl --proto '=https' --tlsv1.2 -sSf https://sh.edgedb.com | sh -s -- -y -v ; edgedb project  init --server-instance=edgedb --non-interactive
 # vscode:
