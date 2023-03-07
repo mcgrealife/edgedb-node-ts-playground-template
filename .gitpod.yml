@@ -9,7 +9,7 @@ tasks:
     before: echo 'before'
     init: |
       yarn
-      curl --proto '=https' --tlsv1.2 -sSf https://sh.edgedb.com | sh -s -- -y -v ; edgedb project  init --server-instance=edgedb --non-interactive
+      curl --proto '=https' --tlsv1.2 -sSf https://sh.edgedb.com | sh -s -- -y -v
       edgedb project init --non-interactive
       mv default.esdl dbschema
     command: |
