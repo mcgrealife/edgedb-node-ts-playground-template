@@ -15,3 +15,14 @@ Via .gitpod.yml
 **Always fresh database** When your gitpod workspace restarts, objects created in your edgedb database will be deleted. (file changes are preserved for 14 days)
 
 **Publish to git** To save your playground changes and share for troubleshooting
+## Only Two Important Files
+- schema `dbschema/default.esdl`
+- query builder code `src/index.ts` 
+
+## Commands
+- `yarn migrate` - helper to create and apply migrations
+- `yarn run` - **to execute your queries** transpiles ts to js, then runs node on 'dist/src/'
+- `yarn ui` - returns edgedb ui link in terminal
+
+
+
