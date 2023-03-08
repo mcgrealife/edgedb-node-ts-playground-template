@@ -1,3 +1,7 @@
+// To execute this edgedb query, `npm run query`
+// For 'e' to reference your latest schema, `npm run migrate`
+// To view your database, `npm run ui`
+
 import { createClient } from 'edgedb'
 import e from '../dbschema/edgeql-js/index.mjs'
 
