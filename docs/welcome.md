@@ -1,11 +1,13 @@
 # Open these files
 
-`dbschema/default.edsl` - Schema
+## dbschema/default.edsl
+Example Schema
 
-`src/index.ts` - Example query Builder
+## src/index.ts
+Example query Builder
 
 
-# commands
-- `yarn migrate` - creates and applies migrations
-- `yarn start` - transpiles ts to js, outputs to 'dist/src/'
+### commands
+- `yarn migrate` - helper to create and apply migrations
+- `yarn start` - **to execute queries** – transpiles .ts to .js, and runs node on the output
 - `yarn ui` - returns edgedb ui link in terminal
