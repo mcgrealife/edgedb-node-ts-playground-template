@@ -1,4 +1,4 @@
-// To execute this edgedb query, `yarn run`
+// To execute this edgedb query, `yarn query`
 // For 'e' to reference your latest schema, `yarn migrate`
 // To view your database, `yarn ui`
 
