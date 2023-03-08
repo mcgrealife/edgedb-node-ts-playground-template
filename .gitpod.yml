@@ -6,14 +6,14 @@ tasks:
     before: echo 'before'
     init: |
       gp open docs/installing.md
+      gp open dbschema/default.esdl
       yarn
       curl --proto '=https' --tlsv1.2 -sSf https://sh.edgedb.com | sh -s -- -y -v
       edgedb project init --non-interactive
       mv default.esdl dbschema
       edgedb migration create --non-interactive && edgedb migration apply && yarn generate
-      gp open dbschema/default.esdl
     command: |
-      if test -e /home/gitpod/.local/bin/edgedb; then echo 'EdgeDB CLI installed successfully' && gp open docs/welcome.md; else curl --proto '=https' --tlsv1.2 -sSf https://sh.edgedb.com | sh -s -- -y -v && edgedb project init --server-instance=edgedb --non-interactive && gp open docs/restart.md; fi
+      if test -e /home/gitpod/.local/bin/edgedb; then echo 'EdgeDB CLI installed successfully' && gp open src/index.esdl; else curl --proto '=https' --tlsv1.2 -sSf https://sh.edgedb.com | sh -s -- -y -v && edgedb project init --server-instance=edgedb --non-interactive && gp open docs/restart.md; fi
 vscode:
   extensions:
     - matt-rudge.auto-open-preview-panel
