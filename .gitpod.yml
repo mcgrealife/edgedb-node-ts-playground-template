@@ -1,7 +1,6 @@
 # https://www.gitpod.io/docs/introduction/learn-gitpod/gitpod-yaml
 
 tasks:
-# Test install CLI via dockerfile to persist between workspace restarts
   - name: install packages, overwrite example schema, run migrations, open files
     before: echo 'before'
     init: |
