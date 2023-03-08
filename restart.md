@@ -20,6 +20,6 @@ As a Reminder:
 
 
 ### Commands
-- `yarn migrate` - helper to create/apply migrations and run generators
-- `yarn query` - **to execute your queries** transpiles ts to js, then runs node on 'dist/src/'
-- `yarn ui` - returns edgedb ui link in terminal
+- `npm run migrate` - helper to create/apply migrations and run generators
+- `npm run query` - **to execute your queries** transpiles ts to js, then runs node on 'dist/src/'
+- `npm run ui` - returns edgedb ui link in terminal

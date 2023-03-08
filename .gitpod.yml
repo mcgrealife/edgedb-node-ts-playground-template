@@ -5,11 +5,11 @@ tasks:
     before: echo 'before'
     init: |
       gp open welcome.md
-      yarn
+      npm i
       curl --proto '=https' --tlsv1.2 -sSf https://sh.edgedb.com | sh -s -- -y -v
       edgedb project init --non-interactive
       mv default.esdl dbschema
-      edgedb migration create --non-interactive && edgedb migration apply && yarn generate
+      edgedb migration create --non-interactive && edgedb migration apply && npm run generate
       gp open dbschema/default.esdl
     command: |
       if test -e /home/gitpod/.local/bin/edgedb; then echo 'EdgeDB CLI installed successfully' && gp open src/index.ts; else gp open restart.md && curl --proto '=https' --tlsv1.2 -sSf https://sh.edgedb.com | sh -s -- -y -v && edgedb project init --server-instance=edgedb --non-interactive; fi
