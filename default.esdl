@@ -1,4 +1,4 @@
-# After editing: `yarn migrate` to create/apply migrations and run generators
+# After editing: `npm run migrate` to create/apply migrations and run generators
 
 module default {
 
