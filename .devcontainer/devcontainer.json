@@ -1,0 +1,30 @@
+// https://containers.dev/implementors/json_reference/#lifecycle-scripts
+{
+  "image": "mcr.microsoft.com/devcontainers/universal:2",
+  "hostRequirements": {
+    "cpus": 4
+  },
+  "waitFor": "onCreateCommand",
+  // "initializeCommand": "A command string or list of command arguments to run on the host machine before the container is created",
+  "updateContentCommand": "npm install && npm run build",
+  "postCreateCommand": "code open welcome.md ; yarn ; curl --proto '=https' --tlsv1.2 -sSf https://sh.edgedb.com | sh -s -- -y -v ; edgedb project init --non-interactive ; mv default.esdl dbschema ; edgedb migration create --non-interactive && edgedb migration apply && yarn generate ; code open dbschema/default.esdl",
+  // "postAttachCommand": {
+  //   "server": "npm run dev"
+  // },
+  "postStartCommand": "if test -e /home/gitpod/.local/bin/edgedb; then echo 'EdgeDB CLI installed successfully' && gp open src/index.ts; else gp open restart.md && curl --proto '=https' --tlsv1.2 -sSf https://sh.edgedb.com | sh -s -- -y -v && edgedb project init --server-instance=edgedb --non-interactive; fi",
+  "customizations": {
+    "codespaces": {
+      "openFiles": [
+        "src/index.ts",
+        "dbschema/default.esdl",
+      ]
+    }
+  }
+  // "portsAttributes": {
+  //   "3000": {
+  //     "label": "Application",
+  //     "onAutoForward": "openPreview"
+  //   }
+  // },
+  // "forwardPorts": [3000]
+}
