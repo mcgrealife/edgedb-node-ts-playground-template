@@ -2,7 +2,9 @@
 
 This happens if the workspace *sleeps*, or is manually *shutdown*.
 
-Your database has been reset, but **all other files are persisted**.
+Gitpod is *reinstalling edgedb cli* and *relinking your project* now.
+
+Your database has been reset, but **all other files were persisted**.
 
 For long term *storage*, and help *troubleshooting your schema*, **git publish**. 
 
