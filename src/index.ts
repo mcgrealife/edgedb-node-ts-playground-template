@@ -8,23 +8,57 @@ const randomString = () => Math.ceil(Math.random() * 10000).toString()
 
 const products = [
   {
-    name: 'zapatilla Nike Air Power Mini 2',
+    name: 'test1',
+    sellingUnitComment: 'insert only color, with unique name',
     barcode: randomString(),
     familyCode: '4973',
     code: '4973-2792',
-    color: { name: 'azul' + randomString(), code: 'az' },
-    // size: { name: 'size.name' + randomString(), code: 'code1' }, // uncomment to test else branch
+    color: { name: 'color.name' + randomString(), code: 'color.code' },
   },
   {
-    name: 'zapatilla Nike Air Power Mini 3',
+    name: 'test2',
+    sellingUnitComment: 'insert only size, with unique name',
     barcode: randomString(),
     familyCode: '4973',
     code: '4973-2792',
-    // color: { name: 'azul' + randomString(), code: 'az' },
-    // color: {},
-    // size: {},
-    // size: { name: 'size.name' + randomString(), code: 'code1' }, // uncomment to test else branch
+    size: { name: 'size.name' + randomString(), code: 'size.code' },
   },
+  {
+    name: 'test3',
+    sellingUnitComment: 'test missing size and color keys entirely',
+    barcode: randomString(),
+    familyCode: '4973',
+    code: '4973-2792',
+  },
+  {
+    name: 'test4',
+    sellingUnitComment:
+      'test color and size keys exist, but containing empty objects {}',
+    barcode: randomString(),
+    familyCode: '4973',
+    code: '4973-2792',
+    color: {},
+    size: {},
+  },
+  // THESE TESTS FAIL. This for loop method decribed here might doesn't seem to handle .unlessConflict() as expected https://discord.com/channels/841451783728529451/1071024789243822130/1072145084843298967
+  // {
+  //   name: 'test5',
+  //   sellingUnitComment:
+  //     'create color.name with fixed string, to test unlessConflict in next test',
+  //   barcode: randomString(),
+  //   familyCode: '4973',
+  //   code: '4973-2792',
+  //   color: { name: 'testingConflict', code: 'az' },
+  // },
+  // {
+  //   name: 'test6',
+  //   sellingUnitComment:
+  //     'non-unique color.name should trigger unlessConflict and insert existing color',
+  //   barcode: randomString(),
+  //   familyCode: '4973',
+  //   code: '4973-2792',
+  //   color: { name: 'testingConflict', code: 'az' },
+  // },
 ]
 
 const query = e.params({ items: e.json }, (params) => {
@@ -34,12 +68,40 @@ const query = e.params({ items: e.json }, (params) => {
       code: e.cast(e.str, item.code),
       familyCode: e.cast(e.str, item.familyCode),
       barcode: e.cast(e.str, item.barcode),
-      color: e.for(e.set(e.json_get(item, 'color', 'name')), (optionalItem) => {
-        return e.insert(e.Color, {
-          name: e.cast(e.str, optionalItem),
-          code: 'test',
-        })
-      }),
+      color: e.for(
+        e.tuple({
+          name: e.json_get(item, 'color', 'name'),
+          code: e.json_get(item, 'color', 'code'),
+        }),
+        (optionalItem) => {
+          return e
+            .insert(e.Color, {
+              name: e.cast(e.str, optionalItem.name),
+              code: e.cast(e.str, optionalItem.code),
+            })
+            .unlessConflict((color) => ({
+              on: color.name,
+              else: color,
+            }))
+        }
+      ),
+      size: e.for(
+        e.tuple({
+          name: e.json_get(item, 'size', 'name'),
+          code: e.json_get(item, 'size', 'code'),
+        }),
+        (optionalItem) => {
+          return e
+            .insert(e.Size, {
+              name: e.cast(e.str, optionalItem.name),
+              code: e.cast(e.str, optionalItem.code),
+            })
+            .unlessConflict((size) => ({
+              on: size.name,
+              else: size,
+            }))
+        }
+      ),
     })
   })
 })
