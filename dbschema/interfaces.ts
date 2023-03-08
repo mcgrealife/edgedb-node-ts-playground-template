@@ -58,9 +58,9 @@ export interface B extends std.$Object {
   "name"?: string | null;
 }
 export interface Color extends std.$Object {
-  "name": string;
   "code": string;
   "createdAt": Date;
+  "name": string;
 }
 export interface Product extends std.$Object {
   "barcode"?: string | null;

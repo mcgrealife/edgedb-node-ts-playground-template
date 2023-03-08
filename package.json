@@ -5,7 +5,7 @@
   "scripts": {
     "build": "tsc",
     "tsnode": "echo 'this is an optional alternate way to run typescript files directly. Alternatively, npm run start.' && npm run reminder && ts-node --esm src/index.ts",
-    "start": "npm run reminder && npm run build && node dist/src",
+    "query": "npm run reminder && npm run build && node dist/src",
     "migrate": "edgedb migration create && edgedb migration apply && npm run generate",
     "generate": "npx @edgedb/generate edgeql-js && npx @edgedb/generate interfaces && npx @edgedb/generate queries --file",
     "reminder": "echo 'reminder to npm run migrate if you changed your schema'",
