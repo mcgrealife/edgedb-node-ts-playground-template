@@ -16,8 +16,7 @@ tasks:
       edgedb migration create --non-interactive && edgedb migration apply && yarn generate
       gp open docs/welcome.md
     command: |
-      if test -e /home/gitpod/.local/bin/edgedb; then echo 'EdgeDB CLI installed successfully'; else curl --proto '=https' --tlsv1.2 -sSf https://sh.edgedb.com | sh -s -- -y -v && edgedb project init --server-instance=edgedb --non-interactive; fi
-      gp open docs/restart.md
+      if test -e /home/gitpod/.local/bin/edgedb; then echo 'EdgeDB CLI installed successfully'; else curl --proto '=https' --tlsv1.2 -sSf https://sh.edgedb.com | sh -s -- -y -v && edgedb project init --server-instance=edgedb --non-interactive && gp open docs/restart.md; fi
 vscode:
   extensions:
     - matt-rudge.auto-open-preview-panel
