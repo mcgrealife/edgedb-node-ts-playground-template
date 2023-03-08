@@ -8,7 +8,7 @@ tasks:
   - name: install packages, overwrite example schema, run migrations, open files
     before: echo 'before'
     init: |
-      gp open installing.md
+      gp open index/src
       yarn
       curl --proto '=https' --tlsv1.2 -sSf https://sh.edgedb.com | sh -s -- -y -v
       edgedb project init --non-interactive
@@ -16,8 +16,7 @@ tasks:
       edgedb migration create --non-interactive && edgedb migration apply && yarn generate
     command: |
       if test -e /home/gitpod/.local/bin/edgedb; then echo 'EdgeDB CLI installed successfully'; else curl --proto '=https' --tlsv1.2 -sSf https://sh.edgedb.com | sh -s -- -y -v && edgedb project init --server-instance=edgedb --non-interactive; fi
-      echo 'opening welcome'
-      gp open welcome.md
+      gp open dbschema/default.esdl
 vscode:
   extensions:
     - matt-rudge.auto-open-preview-panel
