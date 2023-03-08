@@ -2,7 +2,7 @@
 
 tasks:
   - name: install packages, overwrite example schema, run migrations, open files
-    before: echo 'before'
+    before: npm install -g npm@latest
     init: |
       gp open welcome.md
       npm i
