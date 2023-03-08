@@ -51,12 +51,6 @@ export namespace cfg {
   }
   export interface Trust extends AuthMethod {}
 }
-export interface A extends std.$Object {
-  "b": B[];
-}
-export interface B extends std.$Object {
-  "name"?: string | null;
-}
 export interface Color extends std.$Object {
   "code": string;
   "createdAt": Date;
@@ -287,8 +281,6 @@ export interface types {
     "Trust": cfg.Trust;
   };
   "default": {
-    "A": A;
-    "B": B;
     "Color": Color;
     "Product": Product;
     "Size": Size;
