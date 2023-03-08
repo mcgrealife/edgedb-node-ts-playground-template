@@ -1,4 +1,4 @@
-# Edgedb schema docs https://www.edgedb.com/docs/datamodel/index
+# After editing: `yarn migrate` to create/apply migrations and run generators
 
 module default {
 
@@ -12,5 +12,3 @@ module default {
   }
 
 }
-
-# After editing: `npm run migrate` in this VScode browser's integrated terminal

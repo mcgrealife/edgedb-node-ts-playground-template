@@ -1,6 +1,6 @@
-// To execute this edgedb query, `npm run start`
-// For 'e' to access your latest schema, `npm run migrate`
-// To view your database, `npm run ui`
+// To execute this edgedb query, `yarn run`
+// For 'e' to reference your latest schema, `yarn migrate`
+// To view your database, `yarn ui`
 
 import { createClient } from 'edgedb'
 import e from '../dbschema/edgeql-js/index.mjs'
