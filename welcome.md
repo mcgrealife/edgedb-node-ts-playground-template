@@ -1,11 +1,28 @@
-# Open these files
+# Please wait 
 
-`dbschema/default.edsl` - Schema
+## Gitpod is initializing your workspace:
+Via .gitpod.yml
+- intall packages: `edgedb`, `@edgedb/generate`, `typescript`
+- install `edgedb CLI`
+- init edgedb project
+- modify default schema
+- run migrations
 
-`src/index.ts` - Example query Builder
 
+<img src='https://cdn.discordapp.com/icons/841451783728529451/82823a7a280d5ee5adc911a0f0708354.webp?size=64' alt='edgedb-logo' />
 
-# commands
-- `yarn migrate` - creates and applies migrations
-- `yarn start` - transpiles ts to js, outputs to 'dist/src/'
+## Notes:
+**Always fresh database** When your gitpod workspace restarts, objects created in your edgedb database will be deleted. (file changes are preserved for 14 days)
+
+**Publish to git** To save your playground changes and share for troubleshooting
+## Only Two Important Files
+- schema `dbschema/default.esdl`
+- query builder code `src/index.ts` 
+
+## Commands
+- `yarn migrate` - helper to create/apply migrations and run generators
+- `yarn run` - **to execute your queries** transpiles ts to js, then runs node on 'dist/src/'
 - `yarn ui` - returns edgedb ui link in terminal
+
+
+
