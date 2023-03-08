@@ -1,5 +1,4 @@
-# What is this?: This type Example only exists for the example query builder in src/index.ts
-# You can change type Example to anything. See Edgedb schema modeling documentation at https://www.edgedb.com/docs/datamodel/index
+# After editing: `npm run migrate` to create/apply migrations and run generators
 
 module default {
 
@@ -31,15 +30,4 @@ type Product {
     required property createdAt -> datetime { default := datetime_current() };
   }
 
-
-type A {
-  multi link b -> B;
 }
-
-type B {
-  property name -> str;
-}
-
-}
-
-# AFTER EDITING: save, and then `npm run migrate` in this VScode browser's integrated terminal
