@@ -6,17 +6,18 @@
 tasks:
 # Test install CLI via dockerfile to persist between workspace restarts
   - name: install packages, overwrite example schema, run migrations, open files
-    before: gp open installing.md
+    before: echo 'before'
     init: |
-      gp open src/index.ts
+      gp open docs/installing.md
       yarn
       curl --proto '=https' --tlsv1.2 -sSf https://sh.edgedb.com | sh -s -- -y -v
       edgedb project init --non-interactive
       mv default.esdl dbschema
       edgedb migration create --non-interactive && edgedb migration apply && yarn generate
+      gp open docs/welcome.md
     command: |
       if test -e /home/gitpod/.local/bin/edgedb; then echo 'EdgeDB CLI installed successfully'; else curl --proto '=https' --tlsv1.2 -sSf https://sh.edgedb.com | sh -s -- -y -v && edgedb project init --server-instance=edgedb --non-interactive; fi
-      gp open dbschema/default.esdl
+      gp open docs/restart.md
 vscode:
   extensions:
     - matt-rudge.auto-open-preview-panel
