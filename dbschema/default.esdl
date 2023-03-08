@@ -2,12 +2,7 @@
 
 module default {
 
-  type Parent {
-    property name -> str;
-    multi link children -> Child;
-  }
-
-  type Child {
+  type Example {
     property name -> str;
   }
 

@@ -7,13 +7,17 @@ import e from '../dbschema/edgeql-js/index.mjs'
 
 const client = createClient()
 
-const query = e.insert(e.Parent, {
-  name: 'parent',
-  children: e.insert(e.Child, {
-    name: 'child',
-  }),
+const succint = e.select(e.Example, (object) => ({
+  name: e.op(e.array_get(e.str_split(object.name, '::'), 1), '??', 'unknown'),
+}))
+
+const verbose = e.select(e.Example, (object) => {
+  const arrayValue = e.array_get(e.str_split(object.name, '::'), 1)
+  return {
+    name: e.op(arrayValue, 'if', e.op('exists', arrayValue), 'else', 'unknown'),
+  }
 })
 
-const result = await query.run(client)
+const result = await succint.run(client)
 
 console.log('query result:', result)
