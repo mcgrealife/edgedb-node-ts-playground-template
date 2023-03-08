@@ -8,7 +8,7 @@ tasks:
   - name: install packages, overwrite example schema, run migrations, open files
     before: gp open installing.md
     init: |
-      gp open index/src.ts
+      gp open src/index.ts
       yarn
       curl --proto '=https' --tlsv1.2 -sSf https://sh.edgedb.com | sh -s -- -y -v
       edgedb project init --non-interactive
