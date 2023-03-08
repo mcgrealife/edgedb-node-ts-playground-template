@@ -72,6 +72,7 @@ const query = e.params({ items: e.json }, (params) => {
       code: e.cast(e.str, item.code),
       familyCode: e.cast(e.str, item.familyCode),
       barcode: e.cast(e.str, item.barcode),
+      sellingUnitComment: e.cast(e.str, item.sellingUnitComment),
       color: e.for(
         e.tuple({
           name: e.json_get(item, 'color', 'name'),
