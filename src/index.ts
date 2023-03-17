@@ -30,6 +30,9 @@ const result = await queryWithParams.run(client, {
   buildingName: 'building1',
 })
 
-const result = await query.run(client)
-
-console.log('query result:', result)
+console.log(
+  '`elements` is an array of `units`, but the `unit` object is missing `floorplan`',
+  '\n',
+  '`floorplan` data WAS used by e.group() though, because the data is grouped by floorplan.bedroomCount',
+  JSON.stringify(result, null, '\t')
+)
