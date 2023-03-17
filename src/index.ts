@@ -16,10 +16,11 @@ const queryWithParams = e.params({ buildingName: e.str }, ($) =>
       },
     })).units,
     (unit) => {
-      // `unit` includes floorplan
       return {
         ...unit['*'], // does not include floorplan
-        // ...e.Unit['*'], // does not include floorplans either
+        // floorplan: {                  <----- SOLUTION (only works in edgedb v2.12+)
+        //   ...unit.floorplan['*'], //  <----- SOLUTION (only works in edgedb v2.12+)
+        // },                            <----- SOLUTION (only works in edgedb v2.12+)
         by: { bedroomCount: unit.floorplan.bedroomCount }, // groups by floorplan successfully
       }
     }
