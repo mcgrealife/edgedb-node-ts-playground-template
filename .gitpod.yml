@@ -18,7 +18,6 @@ tasks:
       npm run query
 vscode:
   extensions:
-    - matt-rudge.auto-open-preview-panel
     - esbenp.prettier-vscode
     - bungcip.better-toml
     #- magicstack.edgedb (schema syntax highlighting unavailable until VScode extension published to OpenVSX https://github.com/edgedb/edgedb-editor-plugin/issues/22 )

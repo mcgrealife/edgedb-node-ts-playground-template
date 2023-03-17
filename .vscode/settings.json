@@ -1,6 +1,5 @@
 {
   "workbench.editor.enablePreview": false,
   "workbench.editor.showTabs": true,
-  "autoOpenPreviewPanel.openPreviewToSide": false,
   "gitpod.showReleaseNotes": false
 }
