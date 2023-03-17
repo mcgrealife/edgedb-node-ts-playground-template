@@ -16,7 +16,7 @@ const queryWithParams = e.params({ buildingName: e.str }, ($) =>
       },
     })).units,
     (unit) => {
-      console.log(unit) // includes floorplan
+      // `unit` includes floorplan
       return {
         ...unit['*'], // does not include floorplan
         // ...e.Unit['*'], // does not include floorplans either
@@ -26,11 +26,14 @@ const queryWithParams = e.params({ buildingName: e.str }, ($) =>
   )
 )
 
+console.log('...running e.group(e.select()) query')
 const result = await queryWithParams.run(client, {
   buildingName: 'building1',
 })
 
 console.log(
+  'query result:',
+  '\n',
   '`elements` is an array of `units`, but the `unit` object is missing `floorplan`',
   '\n',
   '`floorplan` data WAS used by e.group() though, because the data is grouped by floorplan.bedroomCount',
