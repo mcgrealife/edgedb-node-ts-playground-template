@@ -11,9 +11,10 @@ tasks:
       mv default.esdl dbschema
       edgedb migration create --non-interactive && edgedb migration apply
       npm run generate
+      yarn seed
       gp open dbschema/default.esdl
     command: |
-      if test -e /home/gitpod/.local/bin/edgedb; then echo 'EdgeDB CLI installed successfully' && gp open src/index.ts; else gp open restart.md && curl --proto '=https' --tlsv1.2 -sSf https://sh.edgedb.com | sh -s -- -y -v && edgedb project init --server-instance=edgedb --non-interactive ; fi
+      if test -e /home/gitpod/.local/bin/edgedb; then echo 'EdgeDB CLI installed successfully' && gp open src/index.ts; else gp open restart.md && curl --proto '=https' --tlsv1.2 -sSf https://sh.edgedb.com | sh -s -- -y -v && edgedb project init --server-instance=edgedb --non-interactive && yarn seed ; fi
 vscode:
   extensions:
     - matt-rudge.auto-open-preview-panel
