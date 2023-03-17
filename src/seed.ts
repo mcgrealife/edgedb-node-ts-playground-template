@@ -40,33 +40,39 @@ const data = [
   },
 ]
 
-e.params(
-  {
-    data: e.array(
-      e.tuple({
-        name: e.str,
-        units: e.array(
-          e.tuple({
-            name: e.str,
-            floorplan: e.tuple({ name: e.str, bedroomCount: e.int16 }),
-          })
-        ),
-      })
-    ),
-  },
-  ($) =>
-    e.for(e.array_unpack($.data), ($$) =>
-      e.insert(e.Building, {
-        name: $$.name,
-        units: e.for(e.array_unpack($$.units), ($$$) =>
-          e.insert(e.Unit, {
-            name: $$$.name,
-            floorplan: e.insert(e.Floorplan, {
-              name: $$$.floorplan.name,
-              bedroomCount: $$$.floorplan.bedroomCount,
-            }),
-          })
-        ),
-      })
-    )
-).run(client, { data })
+console.log('seeding database with:', '\n', JSON.stringify(data, null, '\t'))
+
+const query = await e
+  .params(
+    {
+      data: e.array(
+        e.tuple({
+          name: e.str,
+          units: e.array(
+            e.tuple({
+              name: e.str,
+              floorplan: e.tuple({ name: e.str, bedroomCount: e.int16 }),
+            })
+          ),
+        })
+      ),
+    },
+    ($) =>
+      e.for(e.array_unpack($.data), ($$) =>
+        e.insert(e.Building, {
+          name: $$.name,
+          units: e.for(e.array_unpack($$.units), ($$$) =>
+            e.insert(e.Unit, {
+              name: $$$.name,
+              floorplan: e.insert(e.Floorplan, {
+                name: $$$.floorplan.name,
+                bedroomCount: $$$.floorplan.bedroomCount,
+              }),
+            })
+          ),
+        })
+      )
+  )
+  .run(client, { data })
+
+console.log('inserted "building1" with uuid', query)
