@@ -7,11 +7,27 @@ import e from '../dbschema/edgeql-js/index.mjs'
 
 const client = createClient()
 
-const query = e.insert(e.Parent, {
-  name: 'parent',
-  children: e.insert(e.Child, {
-    name: 'child',
-  }),
+const queryWithParams = e.params({ buildingName: e.str }, ($) =>
+  e.group(
+    e.select(e.Building, (b) => ({
+      filter_single: { name: $.buildingName },
+      units: {
+        ...e.Unit['*'], // includes floorplan
+      },
+    })).units,
+    (unit) => {
+      console.log(unit) // includes floorplan
+      return {
+        ...unit['*'], // does not include floorplan
+        // ...e.Unit['*'], // does not include floorplans either
+        by: { bedroomCount: unit.floorplan.bedroomCount }, // groups by floorplan successfully
+      }
+    }
+  )
+)
+
+const result = await queryWithParams.run(client, {
+  buildingName: 'building1',
 })
 
 const result = await query.run(client)
