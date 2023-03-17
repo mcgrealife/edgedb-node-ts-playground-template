@@ -5,10 +5,10 @@
   "scripts": {
     "build": "tsc",
     "query": "npm run build && node dist/src",
+    "seed": "npm run build && node dist/src/seed",
     "migrate": "edgedb migration create && edgedb migration apply && npm run generate",
     "generate": "npx @edgedb/generate edgeql-js && npx @edgedb/generate interfaces && npx @edgedb/generate queries --file",
-    "ui": "edgedb ui --print-url",
-    "seed": "yarn build && node dist/src/seed"
+    "ui": "edgedb ui --print-url"
 
   },
   "dependencies": {
