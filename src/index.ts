@@ -7,20 +7,22 @@ import e from '../dbschema/edgeql-js/index.mjs'
 
 const client = createClient()
 
+// THIS WORKS with .toml version 2.12 (but not in my production at 2.11)
 const queryWithParams = e.params({ buildingName: e.str }, ($) =>
   e.group(
     e.select(e.Building, (b) => ({
       filter_single: { name: $.buildingName },
       units: {
-        ...e.Unit['*'], // includes floorplan
+        ...e.Unit['*'],
       },
     })).units,
     (unit) => {
-      // `unit` includes floorplan
       return {
-        ...unit['*'], // does not include floorplan
-        // ...e.Unit['*'], // does not include floorplans either
-        by: { bedroomCount: unit.floorplan.bedroomCount }, // groups by floorplan successfully
+        floorplan: {
+          ...unit.floorplan['*'],
+        },
+        ...unit['*'],
+        by: { bedroomCount: unit.floorplan.bedroomCount },
       }
     }
   )
