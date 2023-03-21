@@ -4,6 +4,7 @@ module default {
 
   type Parent {
     property name -> str;
+    property age -> int16;
     multi link children -> Child;
   }
 
