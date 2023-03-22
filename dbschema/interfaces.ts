@@ -52,8 +52,8 @@ export namespace cfg {
   export interface Trust extends AuthMethod {}
 }
 export interface Person extends std.$Object {
-  "name"?: string | null;
   "age"?: number | null;
+  "name"?: string | null;
 }
 export namespace schema {
   export type AccessKind = "Select" | "UpdateRead" | "UpdateWrite" | "Delete" | "Insert";
