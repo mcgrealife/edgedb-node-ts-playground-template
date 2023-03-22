@@ -6,42 +6,26 @@ import { createClient } from 'edgedb'
 import e from '../dbschema/edgeql-js/index.mjs'
 
 const client = createClient()
-
-// example data and type for context
-type Person = {
-  name: string
-  age: number
-}
-const exampleData: Person[] = [
-  {
-    name: 'name1',
-    age: 42,
-  },
-]
 // Only difference between query1 and query2 is `filter`
-const query1 = e.params(
-  { name: e.optional(e.str), age: e.optional(e.int16) },
-  ($) =>
-    e.select(e.Person, (p) => ({
-      filter: e.op(p.age, '>', $.age), // always empty set (i.e. cartesian product)
-    }))
+const query1 = e.params({ age: e.optional(e.int16) }, ($) =>
+  e.select(e.Person, (p) => ({
+    filter: e.op(p.age, '>', $.age), // always empty set (i.e. cartesian product)
+  }))
 )
 // query 1 tests
 console.log('expect [] -> ', await query1.run(client, {}))
 console.log('expect [] -> ', await query1.run(client, { age: null }))
 
-const query2 = e.params(
-  { name: e.optional(e.str), age: e.optional(e.int16) },
-  ($) =>
-    e.select(e.Person, (p) => ({
-      filter: e.op(
-        e.op(p.age, '>', $.age), // the original filter
-        'if',
-        e.op('exists', $.age), // check for optional
-        'else',
-        e.bool(true) // else return true
-      ),
-    }))
+const query2 = e.params({ age: e.optional(e.int16) }, ($) =>
+  e.select(e.Person, (p) => ({
+    filter: e.op(
+      e.op(p.age, '>', $.age), // the original filter
+      'if',
+      e.op('exists', $.age), // check for optional
+      'else',
+      e.bool(true) // else return true
+    ),
+  }))
 )
 // query2 tests
 console.log('expect [{id:123}] -> ', await query2.run(client, {}))
