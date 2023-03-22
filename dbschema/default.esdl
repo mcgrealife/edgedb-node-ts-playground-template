@@ -2,14 +2,10 @@
 
 module default {
 
-  type Parent {
+  type Person {
     property name -> str;
     property age -> int16;
-    multi link children -> Child;
   }
 
-  type Child {
-    property name -> str;
-  }
 
 }

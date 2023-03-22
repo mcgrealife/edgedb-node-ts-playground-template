@@ -51,13 +51,9 @@ export namespace cfg {
   }
   export interface Trust extends AuthMethod {}
 }
-export interface Child extends std.$Object {
-  "name"?: string | null;
-}
-export interface Parent extends std.$Object {
+export interface Person extends std.$Object {
   "name"?: string | null;
   "age"?: number | null;
-  "children": Child[];
 }
 export namespace schema {
   export type AccessKind = "Select" | "UpdateRead" | "UpdateWrite" | "Delete" | "Insert";
@@ -270,8 +266,7 @@ export interface types {
     "Trust": cfg.Trust;
   };
   "default": {
-    "Child": Child;
-    "Parent": Parent;
+    "Person": Person;
   };
   "schema": {
     "AccessKind": schema.AccessKind;

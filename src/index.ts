@@ -7,37 +7,64 @@ import e from '../dbschema/edgeql-js/index.mjs'
 
 const client = createClient()
 
-const query = e.params(
+// example data and type for context
+type Person = {
+  name: string
+  age: number
+}
+const exampleData: Person[] = [
+  {
+    name: 'name1',
+    age: 42,
+  },
+]
+// Only difference between query1 and query2 is `filter`
+const query1 = e.params(
   { name: e.optional(e.str), age: e.optional(e.int16) },
   ($) =>
-    e.select(e.Parent, (p) => ({
-      filter: e.op(p.age, '>', $.age),
-      ...p['*'],
+    e.select(e.Person, (p) => ({
+      filter: e.op(p.age, '>', $.age), // always empty set (i.e. cartesian product)
     }))
 )
-
-// const result = await query.run(client)
-const result = await query.run(client, { name: 'roger', age: null })
-const result1 = await query.run(client, { name: 'roger', age: 5 })
-const result2 = await query.run(client, { name: 'roger' })
-
-// console.log('query result:', result) // returns empty set 
-// console.log('query result1:', result1) // filters as expected
-// console.log('query result2:', result2) // returns empty set
+// query 1 tests
+console.log('expect [] -> ', await query1.run(client, {}))
+console.log('expect [] -> ', await query1.run(client, { age: null }))
 
 const query2 = e.params(
   { name: e.optional(e.str), age: e.optional(e.int16) },
   ($) =>
-    e.select(e.Parent, (p) => ({
+    e.select(e.Person, (p) => ({
       filter: e.op(
-        e.op(p.age, '>', $.age),
+        e.op(p.age, '>', $.age), // the original filter
         'if',
-        e.op('exists', $.age),
+        e.op('exists', $.age), // check for optional
         'else',
-        e.bool(true)
+        e.bool(true) // else return true
       ),
-      ...p['*'],
     }))
 )
+// query2 tests
+console.log('expect [{id:123}] -> ', await query2.run(client, {}))
+console.log('expect [{id:123}] -> ', await query2.run(client, { age: null }))
 
-console.log('query2', await query2.run(client, {})) // works!
+// This gets extremely tedious when filtering for multiple values
+e.op(e.op(optionalFilter1, 'and', optionalFilter2), 'and', optionalFilter3) // etc
+// where each optional filter is an if/else with 'exists' operator
+
+// this is becomes even more verbose when params are e.json() and require e.casts
+
+// optional params only work top level. I store filters in an object like this
+const filters = {
+  age: 14,
+  coords: {
+    latitude: 1234,
+    longitude: 5678,
+  },
+}
+// but to use optional params, I must flatten the object to
+const filters = {
+  age: 14,
+  coordsLatitude: 1234,
+  coordsLongitude: 5678,
+}
+// a minor inconvenience to avoid the more verbose e.cast() when using e.json() params -- especially when checking each filter value for optional e.op('exists) in a ternary op
