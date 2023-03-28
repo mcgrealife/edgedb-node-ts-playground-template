@@ -7,13 +7,22 @@ import e from '../dbschema/edgeql-js/index.mjs'
 
 const client = createClient()
 
-const query = e.insert(e.Parent, {
-  name: 'parent',
-  children: e.insert(e.Child, {
-    name: 'child',
-  }),
-})
+const query = e.params(
+  {
+    split: e.bool,
+  },
+  ($) =>
+    e.op(
+      e.select(e.str('true')),
+      'if',
+      e.op($.split, '=', e.bool(true)),
+      'else',
+      e.select(e.str('false'))
+    )
+)
 
-const result = await query.run(client)
+const expectTrue = await query.run(client, { split: false })
+const expectFalse = await query.run(client, { split: true })
 
-console.log('query result:', result)
+console.log('expectTrue:', expectTrue)
+console.log('expectFalse:', expectFalse)
