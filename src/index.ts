@@ -7,13 +7,12 @@ import e from '../dbschema/edgeql-js/index.mjs'
 
 const client = createClient()
 
-const query = e.insert(e.Parent, {
-  name: 'parent',
-  children: e.insert(e.Child, {
-    name: 'child',
-  }),
-})
+const insertQueries = ['1', '2', '3'].map((i) =>
+  e.insert(e.Parent, {
+    name: e.str(i),
+  })
+)
 
-const result = await query.run(client)
+const result = e.with([insertQueries], insertQueries).run(client) // error
 
 console.log('query result:', result)
